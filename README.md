@@ -1,0 +1,1 @@
+# The CLI is a simple project to automate the creation of the structure projects
