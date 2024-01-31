@@ -2,7 +2,12 @@
 import argparse
 import os # import operative system functions
 
+# My utils
 from util.isValidDirectory import isValidDirectory 
+from util.createSubDirectorys import createSubDirectorys
+
+# Templates files
+from util.template import HTML_TEMPLATE 
 
 # Options Program
 parser = argparse.ArgumentParser(
@@ -23,6 +28,16 @@ def createASimpleProjectStructre(path, name):
         # Combine path and name to get the full project path
         project_path = os.path.join(path, name)
 
+        # Create the main directory of the project
+        os.makedirs(project_path, exist_ok=True)
+
+        # TODO: Create a index file with file in util
+
+        # List of the sundirectories
+        subdirectories = ['assets','assets/img','assets/video', 'assets/icons','assets/fonts','css', 'js']
+
+        createSubDirectorys(project_path, subdirectories)
+    
         print(f"The project structure is generate in {project_path}")
     else :
         print(f"Error: {path} is not a valid directory")
