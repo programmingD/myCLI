@@ -2,6 +2,8 @@
 import argparse
 import os # import operative system functions
 
+from util.isValidDirectory import isValidDirectory 
+
 # Options Program
 parser = argparse.ArgumentParser(
     prog= "GW",
@@ -16,10 +18,14 @@ parser.add_argument('-n', '--name', help="Specify the name of the project")
 
 # Function
 def createASimpleProjectStructre(path, name):   
-    # Combine path and name to get the full projevt path
-    project_path = os.path.join(path, name)
+    # Verify if the path exist
+    if isValidDirectory(path):
+        # Combine path and name to get the full project path
+        project_path = os.path.join(path, name)
 
-    print(f"The project structure is generate in {project_path}")
+        print(f"The project structure is generate in {project_path}")
+    else :
+        print(f"Error: {path} is not a valid directory")
     
 
 # Run the mini CLI
