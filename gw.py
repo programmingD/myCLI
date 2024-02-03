@@ -1,13 +1,14 @@
 # Imports
 import argparse
 import os # import operative system functions
+from util.createFile import createFile 
 
 # My utils
 from util.isValidDirectory import isValidDirectory 
 from util.createSubDirectorys import createSubDirectorys
 
 # Templates files
-from util.template import HTML_TEMPLATE 
+from util.template import CSS_TEMPLATE, HTML_TEMPLATE, JS_TEMPLATE 
 
 # Options Program
 parser = argparse.ArgumentParser(
@@ -37,6 +38,10 @@ def createASimpleProjectStructre(path, name):
         subdirectories = ['assets','assets/img','assets/video', 'assets/icons','assets/fonts','css', 'js']
 
         createSubDirectorys(project_path, subdirectories)
+
+        createFile(project_path, ".html", HTML_TEMPLATE)
+        createFile(os.path.join(project_path,subdirectories[5]),".css",CSS_TEMPLATE)
+        createFile(os.path.join(project_path,subdirectories[6]),".js",JS_TEMPLATE)
     
         print(f"The project structure is generate in {project_path}")
     else :
