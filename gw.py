@@ -8,7 +8,7 @@ from util.isValidDirectory import isValidDirectory
 from util.createSubDirectorys import createSubDirectorys
 
 # Templates files
-from util.template import CSS_TEMPLATE, HTML_TEMPLATE, JS_TEMPLATE 
+from util.template import CSS_TEMPLATE, HTML_TEMPLATE, JS_TEMPLATE, PHP_INDEX 
 
 # Options Program
 parser = argparse.ArgumentParser(
@@ -19,6 +19,7 @@ parser = argparse.ArgumentParser(
 
 # Add arguments
 parser.add_argument('-sw','--simpleWeb', help="Generate the structure of a simple web project",action='store_true')
+parser.add_argument('-php','--phpStructure',help="Generate the structure of a simple PHP structure", action='store_true')
 parser.add_argument('-p', '--path', help="Specify the path to create the project structure")
 parser.add_argument('-n', '--name', help="Specify the name of the project")
 
@@ -44,7 +45,22 @@ def createASimpleProjectStructre(path, name):
         print(f"The project structure is generate in {project_path}")
     else :
         print(f"Error: {path} is not a valid directory")
-    
+
+# PHP simple structure
+def createPHPSimpleStructure(path,name):
+    if isValidDirectory(path):
+        project_path = os.path.join(path,name)
+
+        os.makedirs(project_path, exist_ok=True)
+
+        subdirectories = ['public','public/assets','public/assets/img', 'public/assets/video','public/assets/icons','public/assets/fonts','public/css','public/js','config','config/lib','config/db','php']
+        createSubDirectorys(project_path,subdirectories)
+        createFile(project_path,".php", PHP_INDEX)
+        createFile(os.path.join(project_path,subdirectories[11]), ".php", PHP_INDEX)
+
+        print(f"The project structure is generate in {project_path}")
+    else :
+        print(f"Error: {path} is not a valid directory")
 
 # Run the mini CLI
 if __name__ == '__main__':
@@ -56,6 +72,11 @@ if __name__ == '__main__':
         # Check if both path and name are provided
         if args.path and args.name : 
             createASimpleProjectStructre(args.path, args.name)
+        else :
+            print("Both path and name are required for creating a project.")
+    elif args.phpStructure:
+        if args.path and args.name:
+            createPHPSimpleStructure(args.path, args.name)
         else :
             print("Both path and name are required for creating a project.")
     else :
