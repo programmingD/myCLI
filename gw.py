@@ -32,8 +32,6 @@ def createASimpleProjectStructre(path, name):
         # Create the main directory of the project
         os.makedirs(project_path, exist_ok=True)
 
-        # TODO: Create a index file with file in util
-
         # List of the sundirectories
         subdirectories = ['assets','assets/img','assets/video', 'assets/icons','assets/fonts','css', 'js']
 
